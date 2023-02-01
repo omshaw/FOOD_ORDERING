@@ -1,0 +1,85 @@
+*{
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+.navbar{
+  margin: 0;
+  padding-left: 60%;
+  padding-right: 5%;
+  background-color: cornsilk;
+  text-decoration-style: none;
+}
+li{
+  margin: auto;
+  list-style-type: none;
+}
+.w-100
+{
+  height: 500px;
+}
+.card{
+  width: 25%;
+  margin: 4%;
+  border-color: transparent;
+}
+#card{
+  visibility: hidden;
+  justify-content: center;
+}
+.card:hover #card{
+  visibility: visible;
+  display: flex;
+}
+.card:hover{
+  border-style: solid;
+  border-color: rgba(0, 0, 0, 0.175);
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+.login{
+  display: flex;
+  flex-direction: column;
+  margin: 5% 0%;
+  align-items: center;
+}
+input{
+  margin-block: 1%;
+}
+h10{
+  margin: auto;
+  display: flex;
+  justify-content: center;
+}
+.profilebox{
+  margin: 10% auto;
+  text-align: center;
+}
+a{
+  text-decoration: none;
+}
+.footerbox
+{
+  position: relative;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  margin-top: 5%;
+  background-color: black;
+  display: flex;
+  justify-content: space-around;
+  height: 50vh;
+  padding-top: 2%;
+}
+.contact, .legal{
+  display: flex;
+  flex-direction: column;
+}
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
