@@ -44,7 +44,7 @@ const Products = () => {
         SetT(k);
     }
     return (
-        <>
+        <div style={{'marginBottom':'15%'}}>
             <div className='box' style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
                 <h1>Item:</h1>
                 <div className='hidden'>{msg}</div>
@@ -54,7 +54,7 @@ const Products = () => {
             <div className="Ncard" style={{ display: 'flex', flexWrap: 'wrap' }}>
                 {t}
             </div>
-        </>
+        </div>
     );
 }
 export default Products;
