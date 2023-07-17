@@ -10,11 +10,32 @@
 }
 .navbar{
   margin: 0;
-  padding-left: 60%;
-  padding-right: 5%;
+  /* padding-left: 60%;
+  padding-right: 5%; */
   background-color: cornsilk;
   text-decoration-style: none;
 }
+.badge {
+  padding-left: 9px;
+  padding-right: 9px;
+  -webkit-border-radius: 9px;
+  -moz-border-radius: 9px;
+  border-radius: 9px;
+}
+
+.label-warning[href],
+.badge-warning[href] {
+  background-color: #c67605;
+}
+#lblCartCount {
+    font-size: 12px;
+    background: #ff0000;
+    color: #fff;
+    padding: 0 5px;
+    vertical-align: top;
+    margin-left: -10px; 
+}
+
 li{
   margin: auto;
   list-style-type: none;
@@ -62,6 +83,9 @@ h10{
 a{
   text-decoration: none;
 }
+.selected{
+  border-color: blueviolet;
+}
 .footerbox
 {
   position: relative;
@@ -82,4 +106,159 @@ a{
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+
+
+.container {
+  height: 100vh;
+  width: 100vw;
+  font-family: Helvetica;
+}
+
+.loader {
+  height: 20px;
+  width: 250px;
+  position: relative;
+  top: 20%;
+  margin: auto;
+}
+.loader--dot {
+  animation-name: loader;
+  animation-timing-function: ease-in-out;
+  animation-duration: 3s;
+  animation-iteration-count: infinite;
+  height: 20px;
+  width: 20px;
+  border-radius: 100%;
+  background-color: black;
+  position: absolute;
+  border: 2px solid white;
+}
+.loader--dot:first-child {
+  background-color: #8cc759;
+  animation-delay: 0.5s;
+}
+.loader--dot:nth-child(2) {
+  background-color: #8c6daf;
+  animation-delay: 0.4s;
+}
+.loader--dot:nth-child(3) {
+  background-color: #ef5d74;
+  animation-delay: 0.3s;
+}
+.loader--dot:nth-child(4) {
+  background-color: #f9a74b;
+  animation-delay: 0.2s;
+}
+.loader--dot:nth-child(5) {
+  background-color: #60beeb;
+  animation-delay: 0.1s;
+}
+.loader--dot:nth-child(6) {
+  background-color: #fbef5a;
+  animation-delay: 0s;
+}
+.loader--text {
+  position: absolute;
+  top: 200%;
+  left: 0;
+  right: 0;
+  width: 4rem;
+  margin: auto;
+}
+.loader--text:after {
+  content: "Loading";
+  font-weight: bold;
+  animation-name: loading-text;
+  animation-duration: 3s;
+  animation-iteration-count: infinite;
+}
+
+@keyframes loader {
+  15% {
+    transform: translateX(0);
+  }
+  45% {
+    transform: translateX(230px);
+  }
+  65% {
+    transform: translateX(230px);
+  }
+  95% {
+    transform: translateX(0);
+  }
+}
+@keyframes loading-text {
+  0% {
+    content: "Loading";
+  }
+  25% {
+    content: "Loading.";
+  }
+  50% {
+    content: "Loading..";
+  }
+  75% {
+    content: "Loading...";
+  }
+}
+
+.background-masker {
+  background-color: #fff;
+  position: absolute;
+}
+
+@keyframes placeHolderShimmer {
+  0% {
+    background-position: -800px 0
+  }
+  100% {
+    background-position: 800px 0
+  }
+}
+.animated-background {
+  animation-duration: 2s;
+  animation-fill-mode: forwards;
+  animation-iteration-count: infinite;
+  animation-name: placeHolderShimmer;
+  animation-timing-function: linear;
+  background-color: #f6f7f8;
+  background: linear-gradient(to right, #eeeeee 8%, #bbbbbb 18%, #eeeeee 33%);
+  background-size: 800px 104px;
+  height: 70px;
+  margin-right: 10%;
+  position: relative;
+}
+
+.css-dom:empty {
+   /* width: 100%; */
+  /* height: 100%; */
+  border-radius: 6px;
+  box-shadow: 0 10px 45px rgba(0, 0, 0, .2);
+  background-repeat: no-repeat;
+  
+  background-image:
+    radial-gradient(circle 16px, lightgray 99%, transparent 0),
+    linear-gradient(lightgray, lightgray),
+    linear-gradient(lightgray, lightgray),
+    linear-gradient(lightgray, lightgray),
+    linear-gradient(lightgray, lightgray),
+    linear-gradient(#fff, #fff); 
+  
+  background-size:
+    32px 32px,
+    200px 32px,
+    180px 32px,
+    230px 16px,
+    100% 40px,
+    280px 100%;
+  
+  background-position:
+    24px 30px,
+    66px 30px,
+    24px 90px,
+    24px 142px,
+    0 180px,
+    0 0;
 }

@@ -5,6 +5,8 @@ const cors = require('cors')
 const cookieparser = require('cookie-parser')
 const Model = require('./models/users.js')
 const ProductModel = require('./models/product.js')
+const ResturantModel=require('./models/resturant.js')
+const CartModel=require('./models/cart.js')
 const app = express()
 app.use(express.json({ limit: '25mb' }));
 app.use(express.urlencoded({ limit: '25mb', extended: true }));
@@ -45,7 +47,7 @@ app.post('/login', async (req, res) => {
     res.send({ 'msg': '1', 'body': JSON.stringify(v[0]) });
   }
 })
-app.post('/admin/find-product', async (req, res) => {
+app.post('/find-product', async (req, res) => {
   const ele = req.body;
   let v = await ProductModel.find(ele);
   if (v.length) {
@@ -96,7 +98,74 @@ app.post('/admin/add-product', async (req, res) => {
     });
   // }
 })
+app.post('/admin/find-resturant',async(req,res)=>{
+  let v=await ResturantModel.find(req.body);
+  if(v.length)
+    res.send(v);
+  else
+  {
+    res.send({'msg':'Not Found !'});
+  }
+})
+app.post('/admin/add-resturant',async(req,res)=>{
+  console.log(req.body);
+  ResturantModel.create(req.body,(err,result)=>{
+    if(err)
+    {
+      res.send({'msg':'Something went wrong !'});
+    }
+    else
+    {
+      res.send({'msg':'Resturant register Successfully !'});
+    }
+  })
+})
+app.post('/resturants',async(req,res)=>{
+  ResturantModel.find(req.body,(err,data)=>{
+    res.json(data);
+  })
+})
 
+app.post('/r_id',async(req,res)=>{
+ let data=await ResturantModel.find(req.body);
+ res.send(data[0].i_id);
+})
+
+
+app.post('/add-cart', async (req, res) => {
+  const ele = req.body;
+    CartModel.findOneAndUpdate({phone:ele.phone},ele,{upsert:true},function(err,result){
+      if (err) {
+        res.send({ 'msg': 'Something went wrong !' });
+      }
+      else {
+        res.send({ 'msg': 'Item Added in Cart successfully !' })
+      }
+    })
+})
+
+app.post('/cart',async(req,res)=>{
+  let data =await CartModel.find(req.body);
+  if(data.length)
+    res.send(data[0].cart);
+  else
+    res.send({'msg':'Cart is Empty!'});
+})
+
+app.post('/address',async(req,res)=>{
+  const ele=req.body;
+  console.log(ele);
+  Model.updateOne({phone:ele.phone},{$set:{address:ele.address}},function(err,data){
+    if(err)
+    {
+      res.send({ 'msg': 'Something went wrong !' });
+    }
+    else
+    {
+      res.send({ 'msg': 'Address is updated successfully !' });
+    }
+  })
+})
 const port = process.env.PORT || 4000
 app.listen(port, () => {
   console.log('Server is running...')

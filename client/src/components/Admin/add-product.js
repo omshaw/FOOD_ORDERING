@@ -67,7 +67,7 @@ const Add = () => {
     return (
         <div className='box' style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
             <h1>Add Item:</h1>
-            <div className='hidden'>{msg}</div>
+            <div>{msg}</div>
             <input placeholder='Enter Resturant Name' type="text" onChange={(e) => { setName(e.target.value) }} value={name} required></input>
             <input placeholder='Enter Dish Name' type="text" onChange={(e) => { setDishName(e.target.value) }} value={dishName} required></input>
             <input placeholder='Enter Price' type="number" onChange={(e) => { setPrice(e.target.value) }} value={price} required></input>

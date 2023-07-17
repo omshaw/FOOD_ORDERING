@@ -11,7 +11,7 @@ const Products = () => {
         setMsg("");
         const d = { name };
         setName("");
-        let v = await fetch('http://localhost:4000/admin/find-product', {
+        let v = await fetch('http://localhost:4000/admin/find-resturant', {
             method: 'post',
             body: JSON.stringify(d),
             headers: {
@@ -19,9 +19,21 @@ const Products = () => {
             }
         })
         v = await v.json();
-        console.log(v[0].name);
         if (v.msg) {
-            setMsg('No such Resurant exist!');
+            setMsg('No such Resturant exist !');
+            return;
+        }
+        v=await fetch('http://localhost:4000/find-product',{
+            method: 'post',
+            body: JSON.stringify(d),
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+        v=await v.json();
+        if(v.msg)
+        {
+            setMsg('No product exist in the resturant !');
             return;
         }
         const k=[]
@@ -47,7 +59,7 @@ const Products = () => {
         <div style={{'marginBottom':'15%'}}>
             <div className='box' style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
                 <h1>Item:</h1>
-                <div className='hidden'>{msg}</div>
+                <div>{msg}</div>
                 <input placeholder='Enter Resturant Name' type="text" onChange={(e) => { setMsg(""); setName(e.target.value) }} value={name} required></input>
                 <button onClick={f}>Search</button>
             </div>

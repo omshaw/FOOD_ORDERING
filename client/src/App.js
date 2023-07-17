@@ -17,17 +17,34 @@ import Add from './components/Admin/add-product';
 import Delete from './components/Admin/delete-product';
 import Home from './components/Users/home';
 import Products from './components/Admin/products';
+import Resutrant from './components/Admin/add-resturant';
+import Res from './components/Users/resturant';
+import Address from './components/Users/address';
+import Checkout from './components/Users/checkout';
 function App() {
+  const st=localStorage.getItem('cart');
+  const [state,setState]=useState((!st||JSON.parse(st).length===0)?undefined:JSON.parse(st).length);
+  const [bill,setBill]=useState(0);
+  const change=()=>{
+    const l=localStorage.getItem('cart');
+    if(!l||JSON.parse(l).length===0)
+      setState();
+    else
+      setState(JSON.parse(l).length);
+  }
   return (
     <div className="App">
       <BrowserRouter>
-        <Navbar />
+        <Navbar comp={state}/>
         <Routes>
           <Route element={<PrivateComponent />}>
             <Route element={<UserComponent/>}>
-            <Route path='/' element={<Home />}></Route>
+            <Route path='/' element={<Home change={change}/>}></Route>
             <Route path='/products' element={<h1>Products</h1>}></Route>
-            <Route path='/cart' element={<Cart />}></Route>
+            <Route path='/cart' element={<Cart change={change} setBill={setBill}/>}></Route>
+            <Route path='/resturant/:id' element={<Res change={change}/>}></Route>
+            <Route path='/address' element={<Address />}></Route>
+            <Route path='/checkout' element={<Checkout bill={bill}/>}></Route>
             </Route>
             <Route element={<AdminComponent />}>
               <Route path='/admin' element={<Admin />}></Route>
@@ -35,6 +52,7 @@ function App() {
               <Route path='/admin/update-product' element={<Update/>}></Route>
               <Route path='/admin/products' element={<Products/>}></Route>
               <Route path='/admin/delete-product' element={<Delete/>}></Route>
+              <Route path='/admin/add-resturant' element={<Resutrant/>}></Route>
             </Route>
             <Route path='/profile' element={<Profile />}></Route>
             <Route path='/account' element={<Account />}></Route>

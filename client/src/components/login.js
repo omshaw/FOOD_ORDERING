@@ -31,11 +31,27 @@ const Login = () => {
             setMsg('Login Succesfully !');
             let g = v.body;
             g = JSON.parse(g);
-            
-            setTimeout(function () {
-                localStorage.setItem('user', JSON.stringify({ phone: `${phone}`, name: `${g.name}`, email: `${g.email}`,role:`${g.role}`}));
+            console.log(g);
+            setTimeout(async function () {
+                localStorage.setItem('user', JSON.stringify({ phone: `${phone}`, name: `${g.name}`, email: `${g.email}`,role:`${g.role}`,address:g.address}));
                 if(g.role==0)
+                {
+                    let x=await fetch('http://localhost:4000/cart',{
+                        method: 'post',
+                        body: JSON.stringify({phone}),
+                        headers: {
+                            'Content-Type': 'application/json'
+                        }
+                    });
+                    x=await x.json();
+                    if(x.msg)
+                    {
+                        console.log(x.msg);
+                    }
+                    else
+                        localStorage.setItem('cart',JSON.stringify(x));
                     navigate('/');
+                }
                 else
                     navigate('/admin');    
             }, 500);
