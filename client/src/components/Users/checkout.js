@@ -7,6 +7,7 @@ const Checkout = ({bill}) => {
     const [b,setB]=useState(false);
     const [tdata,setTdata]=useState([]);
     const [add,setAdd]=useState([]);
+    const navigate=useNavigate();
     if(!b)
     {
         setB(true);
@@ -21,7 +22,7 @@ const Checkout = ({bill}) => {
                     }
                 })
                 p=await p.json();
-                k.push(<tr><td>{p[0].dishName}</td><td>{p[0].price}</td><td>{obj.Qty}</td></tr>)
+                k.push(<tr><td>{p[0].dishName +" - "+ p[0].name}</td><td>{p[0].price}</td><td>{obj.Qty}</td></tr>)
                 if(k.length===data.length)
                     setTdata(k);
             }
@@ -29,22 +30,41 @@ const Checkout = ({bill}) => {
         })
         let n=[];
         JSON.parse(localStorage.getItem('user')).address.map(function(obj) {
-            n.push(<div className="options" style={{width:'40%',margin:'2%',borderStyle:'inset',cursor:'pointer'}}>{obj.location}</div>);         
+            n.push(<div style={{display:'flex'}}><input className='options' type='radio' name='address'></input><div style={{width:'40%',margin:'2%',borderStyle:'inset',cursor:'pointer',display:'inline-flex'}}>{obj.location}</div></div>);         
         });
         setAdd(n);
     } 
-    let c=document.querySelector('.options');
-    if(c)
-        c.classList.add('selected');
+    // let c=document.querySelector('.options');
+    // if(c)
+    //     c.classList.add('selected');
     $('.options').click((e)=>{
         let k=document.querySelector('.selected');
         if(k)
             k.classList.remove('selected');
-        e.currentTarget.classList.add('selected');
+        e.currentTarget.nextElementSibling.classList.add('selected');
     })
     function f()
     {
-        
+        let k=document.querySelector('.selected');
+        if(!k)
+            return;
+        console.log('Bill:'+ bill+((bill>250)?0:30)+0.5);
+        console.log('Address:'+k.innerText);
+        let Address=k.innerText;
+        let product=[];
+        for(let i=0;i<tdata.length;i++)
+        {
+            let list={};
+            list['name']=tdata[i].props.children[0].props.children;
+            list['price']=tdata[i].props.children[1].props.children;
+            list['Qty']=tdata[i].props.children[2].props.children;
+            product.push(list);
+        }
+        // product=JSON.stringify(product);
+        console.log('Product:'+product);
+        let total=bill+((bill>250)?0:30)+0.5;
+        localStorage.setItem('order',JSON.stringify({total,Address,product}));
+        navigate('/payment');
     }
     return (
             <div style={{marginBottom:'5%'}}>
@@ -85,9 +105,7 @@ const Checkout = ({bill}) => {
                 <button onClick={()=>{$('.new').css('visibility','visible')}} style={{'margin':'2%'}}>New Address</button>
                 <input className='new' type='text' style={{visibility:'hidden'}}></input>
             </table>
-            <h3 style={{margin:'1%'}}>Payment</h3>
-            <hr style={{width:'75%',marginLeft:'1%'}}/>
-            <button onClick={f} style={{margin:'2%',width:'8%',position:'absolute',right:'25%',border:'none',fontSize:'18px',backgroundColor:'#171'}}>Place Order</button>
+            <button onClick={f} style={{margin:'2%',width:'8%',position:'absolute',right:'25%',border:'none',fontSize:'18px',backgroundColor:'grey'}}>Continue</button>
             </div>
     );
 }

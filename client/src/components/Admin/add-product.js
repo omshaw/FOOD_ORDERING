@@ -35,7 +35,7 @@ const Add = () => {
         setPrice("");
         setImage(null);
         inputref.current.value = "";
-        let v = await fetch('http://localhost:4000/admin/find-product', {
+        let v = await fetch('http://localhost:4000/find-product', {
             method: 'post',
             body: JSON.stringify({ name, dishName }),
             headers: {

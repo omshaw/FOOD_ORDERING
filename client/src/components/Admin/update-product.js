@@ -45,7 +45,7 @@ const Update = () => {
             return;
         }
 
-        let v = await fetch('http://localhost:4000/admin/find-product', {
+        let v = await fetch('http://localhost:4000/find-product', {
             method: 'post',
             body: JSON.stringify(d),
             headers: {

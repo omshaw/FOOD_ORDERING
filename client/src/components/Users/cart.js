@@ -83,8 +83,9 @@ const Cart = ({change, setBill}) => {
                 <div style={{width:'30%',display:'flex',flexDirection:'column',justifyContent:'center'}}>
                     <h4>{pro[i].dishName}</h4>
                     <p>{pro[i].description}</p>
+                    <p>{pro[i].name}</p>
                 </div>
-                <h4 style={{display:'flex',alignItems:'center',margin:'auto'}}>x{pro[i].Qty}</h4>
+                <h4 style={{display:'flex',alignItems:'center',margin:'auto'}}>x {pro[i].Qty}</h4>
                 <h5 style={{display:'flex',alignItems:'center',margin:'auto'}}>Rs {pro[i].price}</h5>
                 <i className="fa fa-trash" id={pro[i]._id} aria-hidden="true" style={{fontSize:'22px',margin:'auto 0px'}}></i>
             </div>
@@ -96,7 +97,7 @@ const Cart = ({change, setBill}) => {
                 <hr style={{width:'70%',margin:'1% auto'}}/>
                 <div style={{width:'20%',margin:'1% 10% 1% 70%'}}>
                     <h3>Total: {sum}</h3>
-                    <Link to={{pathname:'/checkout',state:{bill:sum}}} style={{width:'50%',margin:'2% 0%',fontSize:'20px'}}>Checkout</Link>
+                    <Link to={{pathname:'/checkout'}} style={{width:'50%',margin:'2% 0%',fontSize:'20px'}}>Checkout</Link>
                 </div>
                 </>
             );

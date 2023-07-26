@@ -7,6 +7,7 @@ const Model = require('./models/users.js')
 const ProductModel = require('./models/product.js')
 const ResturantModel=require('./models/resturant.js')
 const CartModel=require('./models/cart.js')
+const OrderModel=require('./models/order.js')
 const app = express()
 app.use(express.json({ limit: '25mb' }));
 app.use(express.urlencoded({ limit: '25mb', extended: true }));
@@ -154,7 +155,6 @@ app.post('/cart',async(req,res)=>{
 
 app.post('/address',async(req,res)=>{
   const ele=req.body;
-  console.log(ele);
   Model.updateOne({phone:ele.phone},{$set:{address:ele.address}},function(err,data){
     if(err)
     {
@@ -163,6 +163,32 @@ app.post('/address',async(req,res)=>{
     else
     {
       res.send({ 'msg': 'Address is updated successfully !' });
+    }
+  })
+})
+app.post('/create-order',async(req,res)=>{
+  const ele=req.body;
+  OrderModel.create(ele,(err,result)=>{
+    if(err)
+    {
+      res.send({'msg':'Something went wrong !'});
+    }
+    else
+    {
+      res.send({'msg':'Order placed Successfully !'});
+    }
+  })
+})
+app.post('/orders',async(req,res)=>{
+  const ele=req.body;
+  OrderModel.find(ele,(err,result)=>{
+    if(err)
+    {
+      res.send({'msg':'Something went wrong !'});
+    }
+    else
+    {
+      res.send(result);
     }
   })
 })

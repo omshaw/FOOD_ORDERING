@@ -21,6 +21,8 @@ import Resutrant from './components/Admin/add-resturant';
 import Res from './components/Users/resturant';
 import Address from './components/Users/address';
 import Checkout from './components/Users/checkout';
+import Payment from './components/Users/payment';
+import Order from './components/Users/orders';
 function App() {
   const st=localStorage.getItem('cart');
   const [state,setState]=useState((!st||JSON.parse(st).length===0)?undefined:JSON.parse(st).length);
@@ -45,6 +47,8 @@ function App() {
             <Route path='/resturant/:id' element={<Res change={change}/>}></Route>
             <Route path='/address' element={<Address />}></Route>
             <Route path='/checkout' element={<Checkout bill={bill}/>}></Route>
+            <Route path='/payment' element={<Payment/>}></Route>
+            <Route path='/orders' element={<Order/>}></Route>
             </Route>
             <Route element={<AdminComponent />}>
               <Route path='/admin' element={<Admin />}></Route>
